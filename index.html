@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>FLOW - The 7 F's of Fulfillment</title>
+    <title>FLOW</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -58,33 +58,43 @@
         margin-bottom: 20px;
     }
 
+    /* Side by side layout */
     .pyramids-wrapper {
         display: flex;
-        flex-direction: column;
-        gap: 30px;
+        flex-direction: row;
+        gap: 20px;
         margin-bottom: 25px;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
     }
 
     .pyramid-section {
         text-align: center;
+        flex: 1;
+        min-width: 280px;
+        max-width: 400px;
     }
 
     .pyramid-title {
         font-family: 'Playfair Display', serif;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         color: var(--tiffany-blue);
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         font-weight: 600;
+        text-align: center;
     }
 
     .pyramid-container {
         width: 100%;
-        max-width: 340px;
         margin: 0 auto;
+        display: flex;
+        justify-content: center;
     }
 
     .pyramid-svg {
         width: 100%;
+        max-width: 400px;
         height: auto;
         display: block;
         overflow: visible;
@@ -172,13 +182,13 @@
         flex-shrink: 0;
     }
 
-    h4[data-level="1"]::before { background: var(--aventurine); }
-    h4[data-level="2"]::before { background: #5A8A68; }
-    h4[data-level="3"]::before { background: #6A9877; }
-    h4[data-level="4"]::before { background: var(--tiffany-blue); }
-    h4[data-level="5"]::before { background: #3DC9C4; }
-    h4[data-level="6"]::before { background: var(--clay); }
-    h4[data-level="7"]::before { background: #D4A017; }
+    h4[data-level="1"]::before { background: #F97316; }
+    h4[data-level="2"]::before { background: #EAB308; }
+    h4[data-level="3"]::before { background: #A16207; }
+    h4[data-level="4"]::before { background: #14B8A6; }
+    h4[data-level="5"]::before { background: #3B82F6; }
+    h4[data-level="6"]::before { background: #EC4899; }
+    h4[data-level="7"]::before { background: #8B5CF6; }
 
     h4::after {
         content: '›';
@@ -283,11 +293,15 @@
         margin: 10px 0;
     }
 
-    .comparison-arrow {
-        text-align: center;
-        font-size: 1.5rem;
-        color: var(--clay);
-        margin: 10px 0;
+    /* Mobile: stack vertically */
+    @media (max-width: 700px) {
+        .pyramids-wrapper {
+            flex-direction: column;
+            align-items: center;
+        }
+        .pyramid-section {
+            max-width: 340px;
+        }
     }
 </style>
 ```
@@ -296,128 +310,123 @@
 <body>
     <header>
         <h1>FLOW</h1>
-        <p class="brand-tag">The 7 F's of Fulfillment • From "Working-Class Millionaire"</p>
+        <p class="brand-tag">Flow • GROUNDED • NYR 2026</p>
     </header>
 
 ```
 <div class="pyramids-wrapper">
     
-    <!-- Maslow's Hierarchy - True Triangle with external labels -->
+    <!-- Chip Pyramid - FIRST -->
     <div class="pyramid-section">
-        <div class="pyramid-title">Maslow's Hierarchy of Needs</div>
         <div class="pyramid-container">
-            <svg class="pyramid-svg" viewBox="-20 0 420 250" xmlns="http://www.w3.org/2000/svg">
-                <!-- 
-                True triangle: apex at (150,10), base corners at (0,240) and (300,240)
-                Labels on right side with connector lines
-                -->
+            <svg class="pyramid-svg" viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg">
+                <!-- Pyramid centered at x=180, wider base at 360px, labels to the right -->
                 
-                <!-- Level 5 - Self-actualization (Top) - Purple -->
-                <polygon points="150,10 180,56 120,56" fill="#8B5CF6"/>
-                <text x="150" y="40" class="level-title-text" font-size="7">Self-actualization</text>
-                <!-- Connector line and external label -->
-                <line x1="180" y1="33" x2="310" y2="33" class="connector-line"/>
-                <text x="315" y="30" class="level-desc-text" font-size="6">desire to become the</text>
-                <text x="315" y="40" class="level-desc-text" font-size="6">most that one can be</text>
+                <!-- Level 7 - Flow (Top) - Purple -->
+                <polygon points="180,10 206,58 154,58" fill="#8B5CF6"/>
+                <text x="180" y="40" class="level-title-text" font-size="8">Flow</text>
+                <line x1="206" y1="34" x2="370" y2="34" class="connector-line"/>
+                <text x="375" y="31" class="level-desc-text" font-size="6">mastery, presence,</text>
+                <text x="375" y="41" class="level-desc-text" font-size="6">peak performance</text>
 
-                <!-- Level 4 - Esteem - Blue -->
-                <polygon points="120,56 180,56 210,102 90,102" fill="#3B82F6"/>
-                <text x="150" y="82" class="level-title-text" font-size="9">Esteem</text>
-                <line x1="210" y1="79" x2="310" y2="79" class="connector-line"/>
-                <text x="315" y="76" class="level-desc-text" font-size="6">respect, self-esteem, status,</text>
-                <text x="315" y="86" class="level-desc-text" font-size="6">recognition, strength, freedom</text>
+                <!-- Level 6 - Legacy - Pink -->
+                <polygon points="154,58 206,58 232,106 128,106" fill="#EC4899"/>
+                <text x="180" y="86" class="level-title-text" font-size="9">Legacy</text>
+                <line x1="232" y1="82" x2="370" y2="82" class="connector-line"/>
+                <text x="375" y="79" class="level-desc-text" font-size="6">meaning, contribution,</text>
+                <text x="375" y="89" class="level-desc-text" font-size="6">lasting impact</text>
 
-                <!-- Level 3 - Love and belonging - Green -->
-                <polygon points="90,102 210,102 240,148 60,148" fill="#22C55E"/>
-                <text x="150" y="128" class="level-title-text" font-size="9">Love and belonging</text>
-                <line x1="240" y1="125" x2="310" y2="125" class="connector-line"/>
-                <text x="315" y="122" class="level-desc-text" font-size="6">friendship, intimacy, family,</text>
-                <text x="315" y="132" class="level-desc-text" font-size="6">sense of connection</text>
+                <!-- Level 5 - Future - Blue -->
+                <polygon points="128,106 232,106 258,154 102,154" fill="#3B82F6"/>
+                <text x="180" y="134" class="level-title-text" font-size="9">Future</text>
+                <line x1="258" y1="130" x2="370" y2="130" class="connector-line"/>
+                <text x="375" y="127" class="level-desc-text" font-size="6">vision, planning,</text>
+                <text x="375" y="137" class="level-desc-text" font-size="6">long-term investing</text>
 
-                <!-- Level 2 - Safety needs - Yellow -->
-                <polygon points="60,148 240,148 270,194 30,194" fill="#EAB308"/>
-                <text x="150" y="174" class="level-title-text" font-size="9">Safety needs</text>
-                <line x1="270" y1="171" x2="310" y2="171" class="connector-line"/>
-                <text x="315" y="168" class="level-desc-text" font-size="6">personal security, employment,</text>
-                <text x="315" y="178" class="level-desc-text" font-size="6">resources, health, property</text>
+                <!-- Level 4 - Friends & Fun - Teal -->
+                <polygon points="102,154 258,154 284,202 76,202" fill="#14B8A6"/>
+                <text x="180" y="182" class="level-title-text" font-size="9">Friends & Fun</text>
+                <line x1="284" y1="178" x2="370" y2="178" class="connector-line"/>
+                <text x="375" y="175" class="level-desc-text" font-size="6">relationships, joy,</text>
+                <text x="375" y="185" class="level-desc-text" font-size="6">celebration, connection</text>
 
-                <!-- Level 1 - Physiological needs (Base) - Red -->
-                <polygon points="30,194 270,194 300,240 0,240" fill="#EF4444"/>
-                <text x="150" y="220" class="level-title-text" font-size="9">Physiological needs</text>
-                <line x1="300" y1="217" x2="310" y2="217" class="connector-line"/>
-                <text x="315" y="214" class="level-desc-text" font-size="6">air, water, food, shelter,</text>
-                <text x="315" y="224" class="level-desc-text" font-size="6">sleep, clothing, reproduction</text>
+                <!-- Level 3 - Focus & Fulfillment - Brown -->
+                <polygon points="76,202 284,202 310,250 50,250" fill="#A16207"/>
+                <text x="180" y="230" class="level-title-text" font-size="9">Focus & Fulfillment</text>
+                <line x1="310" y1="226" x2="370" y2="226" class="connector-line"/>
+                <text x="375" y="223" class="level-desc-text" font-size="6">purpose, intentionality,</text>
+                <text x="375" y="233" class="level-desc-text" font-size="6">meaningful work</text>
+
+                <!-- Level 2 - Fitness & Finances - Yellow -->
+                <polygon points="50,250 310,250 336,298 24,298" fill="#EAB308"/>
+                <text x="180" y="278" class="level-title-text" font-size="9">Fitness & Finances</text>
+                <line x1="336" y1="274" x2="370" y2="274" class="connector-line"/>
+                <text x="375" y="271" class="level-desc-text" font-size="6">health, wealth,</text>
+                <text x="375" y="281" class="level-desc-text" font-size="6">energy, resources</text>
+
+                <!-- Level 1 - Faith & Family (Base) - Orange -->
+                <polygon points="24,298 336,298 360,346 0,346" fill="#F97316"/>
+                <text x="180" y="326" class="level-title-text" font-size="9">Faith & Family</text>
+                <line x1="360" y1="322" x2="370" y2="322" class="connector-line"/>
+                <text x="375" y="319" class="level-desc-text" font-size="6">belief, roots,</text>
+                <text x="375" y="329" class="level-desc-text" font-size="6">support, belonging</text>
 
                 <!-- Outer triangle border -->
-                <polygon points="150,10 300,240 0,240" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                <polygon points="180,10 360,346 0,346" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                
+                <!-- Title below pyramid -->
+                <text x="180" y="372" class="level-title-text" font-size="16" fill="#0ABAB5" font-family="Playfair Display, serif">Chip</text>
             </svg>
         </div>
     </div>
 
-    <div class="comparison-arrow">⟱</div>
-
-    <!-- 7 F's Pyramid - True Triangle with external labels -->
+    <!-- Maslow's Hierarchy - SECOND -->
     <div class="pyramid-section">
-        <div class="pyramid-title">The 7 F's of Fulfillment</div>
         <div class="pyramid-container">
-            <svg class="pyramid-svg" viewBox="-20 0 420 295" xmlns="http://www.w3.org/2000/svg">
-                <!-- 
-                True triangle: apex at (150,10), base corners at (0,285) and (300,285)
-                7 equal horizontal slices
-                Labels on right side with connector lines
-                -->
+            <svg class="pyramid-svg" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+                <!-- Pyramid centered at x=180, wider base, labels to the right -->
                 
-                <!-- Level 7 - Flow (Top) - Purple -->
-                <polygon points="150,10 171.4,49 128.6,49" fill="#8B5CF6"/>
-                <text x="150" y="35" class="level-title-text" font-size="7">Flow</text>
-                <line x1="171" y1="30" x2="310" y2="30" class="connector-line"/>
-                <text x="315" y="27" class="level-desc-text" font-size="6">mastery, presence,</text>
-                <text x="315" y="37" class="level-desc-text" font-size="6">peak performance</text>
+                <!-- Level 5 - Self-actualization (Top) - Purple -->
+                <polygon points="180,10 216,66 144,66" fill="#8B5CF6"/>
+                <text x="180" y="34" class="level-title-text" font-size="8">Self</text>
+                <text x="180" y="48" class="level-title-text" font-size="8">actualization</text>
+                <line x1="216" y1="38" x2="370" y2="38" class="connector-line"/>
+                <text x="375" y="35" class="level-desc-text" font-size="6">desire to become the</text>
+                <text x="375" y="45" class="level-desc-text" font-size="6">most that one can be</text>
 
-                <!-- Level 6 - Legacy - Pink -->
-                <polygon points="128.6,49 171.4,49 192.7,88 107.3,88" fill="#EC4899"/>
-                <text x="150" y="72" class="level-title-text" font-size="8">Legacy</text>
-                <line x1="193" y1="69" x2="310" y2="69" class="connector-line"/>
-                <text x="315" y="66" class="level-desc-text" font-size="6">meaning, contribution,</text>
-                <text x="315" y="76" class="level-desc-text" font-size="6">lasting impact</text>
+                <!-- Level 4 - Esteem - Blue -->
+                <polygon points="144,66 216,66 252,122 108,122" fill="#3B82F6"/>
+                <text x="180" y="98" class="level-title-text" font-size="10">Esteem</text>
+                <line x1="252" y1="94" x2="370" y2="94" class="connector-line"/>
+                <text x="375" y="91" class="level-desc-text" font-size="6">respect, self-esteem, status,</text>
+                <text x="375" y="101" class="level-desc-text" font-size="6">recognition, strength, freedom</text>
 
-                <!-- Level 5 - Future - Blue -->
-                <polygon points="107.3,88 192.7,88 214.1,127 85.9,127" fill="#3B82F6"/>
-                <text x="150" y="111" class="level-title-text" font-size="8">Future</text>
-                <line x1="214" y1="108" x2="310" y2="108" class="connector-line"/>
-                <text x="315" y="105" class="level-desc-text" font-size="6">vision, planning,</text>
-                <text x="315" y="115" class="level-desc-text" font-size="6">long-term investing</text>
+                <!-- Level 3 - Love and belonging - Green -->
+                <polygon points="108,122 252,122 288,178 72,178" fill="#22C55E"/>
+                <text x="180" y="154" class="level-title-text" font-size="10">Love and belonging</text>
+                <line x1="288" y1="150" x2="370" y2="150" class="connector-line"/>
+                <text x="375" y="147" class="level-desc-text" font-size="6">friendship, intimacy, family,</text>
+                <text x="375" y="157" class="level-desc-text" font-size="6">sense of connection</text>
 
-                <!-- Level 4 - Friends & Fun - Teal -->
-                <polygon points="85.9,127 214.1,127 235.5,166 64.5,166" fill="#14B8A6"/>
-                <text x="150" y="150" class="level-title-text" font-size="8">Friends & Fun</text>
-                <line x1="236" y1="147" x2="310" y2="147" class="connector-line"/>
-                <text x="315" y="144" class="level-desc-text" font-size="6">relationships, joy,</text>
-                <text x="315" y="154" class="level-desc-text" font-size="6">celebration, connection</text>
+                <!-- Level 2 - Safety needs - Yellow -->
+                <polygon points="72,178 288,178 324,234 36,234" fill="#EAB308"/>
+                <text x="180" y="210" class="level-title-text" font-size="10">Safety needs</text>
+                <line x1="324" y1="206" x2="370" y2="206" class="connector-line"/>
+                <text x="375" y="203" class="level-desc-text" font-size="6">personal security, employment,</text>
+                <text x="375" y="213" class="level-desc-text" font-size="6">resources, health, property</text>
 
-                <!-- Level 3 - Focus & Fulfillment - Brown -->
-                <polygon points="64.5,166 235.5,166 256.8,205 43.2,205" fill="#A16207"/>
-                <text x="150" y="189" class="level-title-text" font-size="8">Focus & Fulfillment</text>
-                <line x1="257" y1="186" x2="310" y2="186" class="connector-line"/>
-                <text x="315" y="183" class="level-desc-text" font-size="6">purpose, intentionality,</text>
-                <text x="315" y="193" class="level-desc-text" font-size="6">meaningful work</text>
-
-                <!-- Level 2 - Fitness & Finances - Yellow -->
-                <polygon points="43.2,205 256.8,205 278.2,244 21.8,244" fill="#EAB308"/>
-                <text x="150" y="228" class="level-title-text" font-size="8">Fitness & Finances</text>
-                <line x1="278" y1="225" x2="310" y2="225" class="connector-line"/>
-                <text x="315" y="222" class="level-desc-text" font-size="6">health, wealth,</text>
-                <text x="315" y="232" class="level-desc-text" font-size="6">energy, resources</text>
-
-                <!-- Level 1 - Faith & Family (Base) - Orange -->
-                <polygon points="21.8,244 278.2,244 300,285 0,285" fill="#F97316"/>
-                <text x="150" y="268" class="level-title-text" font-size="8">Faith & Family</text>
-                <line x1="300" y1="265" x2="310" y2="265" class="connector-line"/>
-                <text x="315" y="262" class="level-desc-text" font-size="6">belief, roots,</text>
-                <text x="315" y="272" class="level-desc-text" font-size="6">support, belonging</text>
+                <!-- Level 1 - Physiological needs (Base) - Red -->
+                <polygon points="36,234 324,234 360,290 0,290" fill="#EF4444"/>
+                <text x="180" y="266" class="level-title-text" font-size="10">Physiological needs</text>
+                <line x1="360" y1="262" x2="370" y2="262" class="connector-line"/>
+                <text x="375" y="259" class="level-desc-text" font-size="6">air, water, food, shelter,</text>
+                <text x="375" y="269" class="level-desc-text" font-size="6">sleep, clothing, reproduction</text>
 
                 <!-- Outer triangle border -->
-                <polygon points="150,10 300,285 0,285" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                <polygon points="180,10 360,290 0,290" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                
+                <!-- Title below pyramid -->
+                <text x="180" y="315" class="level-title-text" font-size="16" fill="#0ABAB5" font-family="Playfair Display, serif">Maslow</text>
             </svg>
         </div>
     </div>
@@ -427,7 +436,7 @@
 <h2 onclick="toggleSection(this)">The Framework</h2>
 <div class="collapsible-content">
     <div class="info-card">
-        <p>The 7 F's builds on Maslow's foundation but expands it for modern wealth-builders. Where Maslow stops at self-actualization, we add <strong>Legacy</strong> (what you leave behind) and <strong>Flow</strong> (the ultimate state of being). Each level supports the ones above it—you can't sustain Flow without Legacy, and none of it matters without Faith & Family to anchor you.</p>
+        <p>Flow builds on Maslow's hierarchy but expands it for modern life. Where Maslow stops at self-actualization, we add <strong>Legacy</strong> (what you leave behind) and <strong>Flow</strong> (the ultimate state of being). Each level supports the ones above it—you can't sustain Flow without Legacy, and none of it matters without Faith & Family to anchor you.</p>
     </div>
 </div>
 
