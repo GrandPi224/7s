@@ -82,7 +82,7 @@
         .pyramids-wrapper {
             flex-direction: row;
             justify-content: center;
-            align-items: flex-end;
+            align-items: flex-start;
             gap: 40px;
         }
     }
@@ -90,12 +90,12 @@
     .pyramid-section {
         text-align: center;
         width: 100%;
-        max-width: 500px;
+        max-width: 400px;
     }
 
     @media (min-width: 900px) {
         .pyramid-section {
-            flex: 0 1 500px;
+            flex: 0 1 400px;
         }
     }
 
@@ -108,10 +108,23 @@
 
     .pyramid-svg {
         width: 100%;
-        max-width: 500px;
+        max-width: 400px;
         height: auto;
         display: block;
         overflow: visible;
+    }
+
+    .pyramid-level {
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .pyramid-level:hover {
+        filter: brightness(1.15);
+    }
+
+    .pyramid-level.selected {
+        filter: brightness(1.25);
     }
 
     .level-title-text {
@@ -119,25 +132,88 @@
         font-weight: 700;
         fill: white;
         text-anchor: middle;
+        pointer-events: none;
     }
 
-    .level-desc-text {
+    .pyramid-label {
+        font-family: 'Playfair Display', serif;
+        fill: var(--tiffany-blue);
+        text-anchor: middle;
+    }
+
+    /* ========================================
+       DESCRIPTION PANEL
+       ======================================== */
+
+    .description-panel {
+        background: rgba(30, 35, 50, 0.95);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 16px;
+        padding: 20px;
+        margin-top: 20px;
+        width: 100%;
+        max-width: 400px;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .description-panel.visible {
+        opacity: 1;
+        max-height: 300px;
+        padding: 20px;
+    }
+
+    .description-panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+    }
+
+    .description-panel-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .level-badge {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-family: 'Source Sans Pro', sans-serif;
-        font-weight: 400;
-        fill: rgba(255,255,255,0.7);
-        text-anchor: start;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: white;
     }
 
-    .connector-line {
-        stroke: rgba(255,255,255,0.3);
-        stroke-width: 0.5;
+    .description-panel-close {
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.5);
+        font-size: 1.8rem;
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
+        transition: color 0.2s ease;
     }
 
-    @media (max-width: 550px) {
-        .connector-line,
-        .level-desc-text {
-            opacity: 0;
-        }
+    .description-panel-close:hover {
+        color: var(--tiffany-blue);
+    }
+
+    .description-panel-text {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: rgba(255,255,255,0.85);
     }
 
     /* ========================================
@@ -627,6 +703,14 @@
         line-height: 1.5;
     }
 
+    .tap-hint {
+        font-size: 0.75rem;
+        color: rgba(255,255,255,0.4);
+        text-align: center;
+        margin-top: 10px;
+        font-style: italic;
+    }
+
     @media (min-width: 900px) {
         h1 {
             font-size: 3rem;
@@ -676,96 +760,100 @@
 ```
     <div class="pyramids-wrapper">
         
-        <!-- CHIP Pyramid - EXACT ORIGINAL -->
+        <!-- CHIP Pyramid - Interactive -->
         <div class="pyramid-section">
             <div class="pyramid-container">
-                <svg class="pyramid-svg" viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="180,10 206,58 154,58" fill="#8B5CF6"/>
-                    <text x="180" y="40" class="level-title-text" font-size="8">Flow</text>
-                    <line x1="206" y1="34" x2="370" y2="34" class="connector-line"/>
-                    <text x="375" y="31" class="level-desc-text" font-size="6">mastery, presence,</text>
-                    <text x="375" y="41" class="level-desc-text" font-size="6">peak performance</text>
+                <svg class="pyramid-svg" viewBox="0 0 360 320" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Level 7: Flow -->
+                    <polygon class="pyramid-level" id="chip-7" points="180,10 206,58 154,58" fill="#8B5CF6" onclick="showChipDescription(7)"/>
+                    <text x="180" y="42" class="level-title-text" font-size="9">Flow</text>
 
-                    <polygon points="154,58 206,58 232,106 128,106" fill="#EC4899"/>
-                    <text x="180" y="86" class="level-title-text" font-size="9">Legacy</text>
-                    <line x1="232" y1="82" x2="370" y2="82" class="connector-line"/>
-                    <text x="375" y="79" class="level-desc-text" font-size="6">meaning, contribution,</text>
-                    <text x="375" y="89" class="level-desc-text" font-size="6">lasting impact</text>
+                    <!-- Level 6: Legacy -->
+                    <polygon class="pyramid-level" id="chip-6" points="154,58 206,58 232,106 128,106" fill="#EC4899" onclick="showChipDescription(6)"/>
+                    <text x="180" y="88" class="level-title-text" font-size="10">Legacy</text>
 
-                    <polygon points="128,106 232,106 258,154 102,154" fill="#3B82F6"/>
-                    <text x="180" y="134" class="level-title-text" font-size="9">Future</text>
-                    <line x1="258" y1="130" x2="370" y2="130" class="connector-line"/>
-                    <text x="375" y="127" class="level-desc-text" font-size="6">vision, planning,</text>
-                    <text x="375" y="137" class="level-desc-text" font-size="6">long-term investing</text>
+                    <!-- Level 5: Future -->
+                    <polygon class="pyramid-level" id="chip-5" points="128,106 232,106 258,154 102,154" fill="#3B82F6" onclick="showChipDescription(5)"/>
+                    <text x="180" y="136" class="level-title-text" font-size="10">Future</text>
 
-                    <polygon points="102,154 258,154 284,202 76,202" fill="#14B8A6"/>
-                    <text x="180" y="182" class="level-title-text" font-size="9">Friends & Fun</text>
-                    <line x1="284" y1="178" x2="370" y2="178" class="connector-line"/>
-                    <text x="375" y="175" class="level-desc-text" font-size="6">relationships, joy,</text>
-                    <text x="375" y="185" class="level-desc-text" font-size="6">celebration, connection</text>
+                    <!-- Level 4: Friends & Fun -->
+                    <polygon class="pyramid-level" id="chip-4" points="102,154 258,154 284,202 76,202" fill="#14B8A6" onclick="showChipDescription(4)"/>
+                    <text x="180" y="184" class="level-title-text" font-size="10">Friends & Fun</text>
 
-                    <polygon points="76,202 284,202 310,250 50,250" fill="#A16207"/>
-                    <text x="180" y="230" class="level-title-text" font-size="9">Focus & Fulfillment</text>
-                    <line x1="310" y1="226" x2="370" y2="226" class="connector-line"/>
-                    <text x="375" y="223" class="level-desc-text" font-size="6">purpose, intentionality,</text>
-                    <text x="375" y="233" class="level-desc-text" font-size="6">meaningful work</text>
+                    <!-- Level 3: Focus & Fulfillment -->
+                    <polygon class="pyramid-level" id="chip-3" points="76,202 284,202 310,250 50,250" fill="#A16207" onclick="showChipDescription(3)"/>
+                    <text x="180" y="232" class="level-title-text" font-size="10">Focus & Fulfillment</text>
 
-                    <polygon points="50,250 310,250 336,298 24,298" fill="#EAB308"/>
-                    <text x="180" y="278" class="level-title-text" font-size="9">Fitness & Finances</text>
-                    <line x1="336" y1="274" x2="370" y2="274" class="connector-line"/>
-                    <text x="375" y="271" class="level-desc-text" font-size="6">health, wealth,</text>
-                    <text x="375" y="281" class="level-desc-text" font-size="6">energy, resources</text>
+                    <!-- Level 2: Fitness & Finances -->
+                    <polygon class="pyramid-level" id="chip-2" points="50,250 310,250 336,298 24,298" fill="#EAB308" onclick="showChipDescription(2)"/>
+                    <text x="180" y="280" class="level-title-text" font-size="10">Fitness & Finances</text>
 
-                    <polygon points="24,298 336,298 360,346 0,346" fill="#F97316"/>
-                    <text x="180" y="326" class="level-title-text" font-size="9">Faith & Family</text>
-                    <line x1="360" y1="322" x2="370" y2="322" class="connector-line"/>
-                    <text x="375" y="319" class="level-desc-text" font-size="6">belief, roots,</text>
-                    <text x="375" y="329" class="level-desc-text" font-size="6">support, belonging</text>
+                    <!-- Level 1: Faith & Family -->
+                    <polygon class="pyramid-level" id="chip-1" points="24,298 336,298 360,346 0,346" fill="#F97316" onclick="showChipDescription(1)"/>
+                    <text x="180" y="328" class="level-title-text" font-size="10">Faith & Family</text>
 
+                    <!-- Outline -->
                     <polygon points="180,10 360,346 0,346" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-                    <text x="180" y="372" class="level-title-text" font-size="16" fill="#0ABAB5" font-family="Playfair Display, serif">Chip</text>
                 </svg>
+            </div>
+            <p class="tap-hint">Tap a level to learn more</p>
+            <text class="pyramid-label" style="display: block; text-align: center; font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #0ABAB5; margin-top: 10px;">Chip</text>
+            
+            <!-- CHIP Description Panel -->
+            <div class="description-panel" id="chip-panel">
+                <div class="description-panel-header">
+                    <div class="description-panel-title">
+                        <div class="level-badge" id="chip-badge">1</div>
+                        <span id="chip-title">Faith & Family</span>
+                    </div>
+                    <button class="description-panel-close" onclick="closeChipPanel()">×</button>
+                </div>
+                <p class="description-panel-text" id="chip-text"></p>
             </div>
         </div>
 
-        <!-- MASLOW Pyramid - EXACT ORIGINAL FROM YOUR CODE -->
+        <!-- MASLOW Pyramid - Interactive -->
         <div class="pyramid-section">
             <div class="pyramid-container">
-                <svg class="pyramid-svg" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="180,10 216,66 144,66" fill="#8B5CF6"/>
-                    <text x="180" y="34" class="level-title-text" font-size="8">Self</text>
+                <svg class="pyramid-svg" viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Level 5: Self-actualization -->
+                    <polygon class="pyramid-level" id="maslow-5" points="180,10 216,66 144,66" fill="#8B5CF6" onclick="showMaslowDescription(5)"/>
+                    <text x="180" y="34" class="level-title-text" font-size="8">Self-</text>
                     <text x="180" y="48" class="level-title-text" font-size="8">actualization</text>
-                    <line x1="216" y1="38" x2="370" y2="38" class="connector-line"/>
-                    <text x="375" y="35" class="level-desc-text" font-size="6">desire to become the</text>
-                    <text x="375" y="45" class="level-desc-text" font-size="6">most that one can be</text>
 
-                    <polygon points="144,66 216,66 252,122 108,122" fill="#3B82F6"/>
-                    <text x="180" y="98" class="level-title-text" font-size="10">Esteem</text>
-                    <line x1="252" y1="94" x2="370" y2="94" class="connector-line"/>
-                    <text x="375" y="91" class="level-desc-text" font-size="6">respect, self-esteem, status,</text>
-                    <text x="375" y="101" class="level-desc-text" font-size="6">recognition, strength, freedom</text>
+                    <!-- Level 4: Esteem -->
+                    <polygon class="pyramid-level" id="maslow-4" points="144,66 216,66 252,122 108,122" fill="#3B82F6" onclick="showMaslowDescription(4)"/>
+                    <text x="180" y="100" class="level-title-text" font-size="11">Esteem</text>
 
-                    <polygon points="108,122 252,122 288,178 72,178" fill="#22C55E"/>
-                    <text x="180" y="154" class="level-title-text" font-size="10">Love and belonging</text>
-                    <line x1="288" y1="150" x2="370" y2="150" class="connector-line"/>
-                    <text x="375" y="147" class="level-desc-text" font-size="6">friendship, intimacy, family,</text>
-                    <text x="375" y="157" class="level-desc-text" font-size="6">sense of connection</text>
+                    <!-- Level 3: Love and belonging -->
+                    <polygon class="pyramid-level" id="maslow-3" points="108,122 252,122 288,178 72,178" fill="#22C55E" onclick="showMaslowDescription(3)"/>
+                    <text x="180" y="156" class="level-title-text" font-size="11">Love & Belonging</text>
 
-                    <polygon points="72,178 288,178 324,234 36,234" fill="#EAB308"/>
-                    <text x="180" y="210" class="level-title-text" font-size="10">Safety needs</text>
-                    <line x1="324" y1="206" x2="370" y2="206" class="connector-line"/>
-                    <text x="375" y="203" class="level-desc-text" font-size="6">personal security, employment,</text>
-                    <text x="375" y="213" class="level-desc-text" font-size="6">resources, health, property</text>
+                    <!-- Level 2: Safety needs -->
+                    <polygon class="pyramid-level" id="maslow-2" points="72,178 288,178 324,234 36,234" fill="#EAB308" onclick="showMaslowDescription(2)"/>
+                    <text x="180" y="212" class="level-title-text" font-size="11">Safety Needs</text>
 
-                    <polygon points="36,234 324,234 360,290 0,290" fill="#EF4444"/>
-                    <text x="180" y="266" class="level-title-text" font-size="10">Physiological needs</text>
-                    <line x1="360" y1="262" x2="370" y2="262" class="connector-line"/>
-                    <text x="375" y="259" class="level-desc-text" font-size="6">air, water, food, shelter,</text>
-                    <text x="375" y="269" class="level-desc-text" font-size="6">sleep, clothing, reproduction</text>
+                    <!-- Level 1: Physiological needs -->
+                    <polygon class="pyramid-level" id="maslow-1" points="36,234 324,234 360,290 0,290" fill="#EF4444" onclick="showMaslowDescription(1)"/>
+                    <text x="180" y="268" class="level-title-text" font-size="11">Physiological Needs</text>
 
+                    <!-- Outline -->
                     <polygon points="180,10 360,290 0,290" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-                    <text x="180" y="315" class="level-title-text" font-size="16" fill="#0ABAB5" font-family="Playfair Display, serif">Maslow</text>
                 </svg>
+            </div>
+            <p class="tap-hint">Tap a level to learn more</p>
+            <text class="pyramid-label" style="display: block; text-align: center; font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #0ABAB5; margin-top: 10px;">Maslow</text>
+            
+            <!-- Maslow Description Panel -->
+            <div class="description-panel" id="maslow-panel">
+                <div class="description-panel-header">
+                    <div class="description-panel-title">
+                        <div class="level-badge" id="maslow-badge">1</div>
+                        <span id="maslow-title">Physiological Needs</span>
+                    </div>
+                    <button class="description-panel-close" onclick="closeMaslowPanel()">×</button>
+                </div>
+                <p class="description-panel-text" id="maslow-text"></p>
             </div>
         </div>
     </div>
@@ -1014,6 +1102,150 @@
 </div>
 
 <script>
+    // ========================================
+    // CHIP PYRAMID DATA & FUNCTIONS
+    // ========================================
+    
+    const chipLevels = {
+        1: {
+            title: "Faith & Family",
+            color: "#F97316",
+            description: "Your bedrock. Faith—whether spiritual, philosophical, or a deep belief in something greater—provides the \"why\" behind everything else. Family creates the support system that makes risk-taking possible. Without roots, there's no growth."
+        },
+        2: {
+            title: "Fitness & Finances",
+            color: "#EAB308",
+            description: "Your twin engines. Physical health and financial health power everything above. You can't chase dreams while running on empty—literally or figuratively. These aren't goals in themselves; they're the fuel that makes higher pursuits possible."
+        },
+        3: {
+            title: "Focus & Fulfillment",
+            color: "#A16207",
+            description: "With your foundation secure and fuel tanks full, you can direct energy intentionally. Focus means choosing what matters and saying no to what doesn't. Fulfillment emerges when daily work aligns with deeper values."
+        },
+        4: {
+            title: "Friends & Fun",
+            color: "#14B8A6",
+            description: "Success without celebration is just survival. Meaningful relationships and genuine joy aren't luxuries—they're essential to sustained performance. The journey should be worth taking, not just the destination."
+        },
+        5: {
+            title: "Future",
+            color: "#3B82F6",
+            description: "Here you shift from living day-to-day to building something that outlasts today's problems. Future-thinking means investing time, money, and energy in outcomes you may not see for years. It's planting trees whose shade you may never sit under."
+        },
+        6: {
+            title: "Legacy",
+            color: "#EC4899",
+            description: "Legacy isn't about monuments or money—it's about meaning that outlives you. What did you build? Who did you help? What did you teach? Here, your focus shifts from \"what can I get?\" to \"what can I give?\""
+        },
+        7: {
+            title: "Flow",
+            color: "#8B5CF6",
+            description: "The pinnacle. That rare state where challenge meets capability and time disappears. Operating in your zone of genius—work feels like play, and your contribution seems effortless to others. This is where craft becomes calling, and purpose becomes presence."
+        }
+    };
+
+    let selectedChipLevel = null;
+
+    function showChipDescription(level) {
+        const data = chipLevels[level];
+        
+        // Remove selected state from all levels
+        for (let i = 1; i <= 7; i++) {
+            document.getElementById(`chip-${i}`).classList.remove('selected');
+        }
+        
+        // Add selected state to clicked level
+        document.getElementById(`chip-${level}`).classList.add('selected');
+        selectedChipLevel = level;
+        
+        // Update panel content
+        document.getElementById('chip-badge').textContent = level;
+        document.getElementById('chip-badge').style.background = data.color;
+        document.getElementById('chip-title').textContent = data.title;
+        document.getElementById('chip-title').style.color = data.color;
+        document.getElementById('chip-text').textContent = data.description;
+        
+        // Show panel
+        document.getElementById('chip-panel').classList.add('visible');
+    }
+
+    function closeChipPanel() {
+        document.getElementById('chip-panel').classList.remove('visible');
+        if (selectedChipLevel) {
+            document.getElementById(`chip-${selectedChipLevel}`).classList.remove('selected');
+            selectedChipLevel = null;
+        }
+    }
+
+    // ========================================
+    // MASLOW PYRAMID DATA & FUNCTIONS
+    // ========================================
+    
+    const maslowLevels = {
+        1: {
+            title: "Physiological Needs",
+            color: "#EF4444",
+            description: "The foundation of human survival: air, water, food, shelter, sleep, clothing, and reproduction. These biological requirements must be met before any higher needs can be addressed. Without these basics secured, the mind cannot focus on anything else."
+        },
+        2: {
+            title: "Safety Needs",
+            color: "#EAB308",
+            description: "Once survival is assured, humans seek security and stability. This includes personal security, employment, resources, health, and property. A sense of order, predictability, and control over one's life becomes the priority."
+        },
+        3: {
+            title: "Love & Belonging",
+            color: "#22C55E",
+            description: "With safety secured, the need for interpersonal relationships emerges. Friendship, intimacy, family, and a sense of connection become essential. Humans are social creatures—isolation leads to anxiety and depression."
+        },
+        4: {
+            title: "Esteem",
+            color: "#3B82F6",
+            description: "The desire for respect, self-esteem, status, recognition, strength, and freedom. This includes both the need to feel valued by others and the internal sense of competence and achievement. Lack of esteem leads to feelings of inferiority."
+        },
+        5: {
+            title: "Self-Actualization",
+            color: "#8B5CF6",
+            description: "The desire to become the most that one can be. This is the realization of personal potential, self-fulfillment, seeking personal growth, and peak experiences. It's about becoming everything you are capable of becoming."
+        }
+    };
+
+    let selectedMaslowLevel = null;
+
+    function showMaslowDescription(level) {
+        const data = maslowLevels[level];
+        
+        // Remove selected state from all levels
+        for (let i = 1; i <= 5; i++) {
+            document.getElementById(`maslow-${i}`).classList.remove('selected');
+        }
+        
+        // Add selected state to clicked level
+        document.getElementById(`maslow-${level}`).classList.add('selected');
+        selectedMaslowLevel = level;
+        
+        // Update panel content
+        document.getElementById('maslow-badge').textContent = level;
+        document.getElementById('maslow-badge').style.background = data.color;
+        document.getElementById('maslow-title').textContent = data.title;
+        document.getElementById('maslow-title').style.color = data.color;
+        document.getElementById('maslow-text').textContent = data.description;
+        
+        // Show panel
+        document.getElementById('maslow-panel').classList.add('visible');
+    }
+
+    function closeMaslowPanel() {
+        document.getElementById('maslow-panel').classList.remove('visible');
+        if (selectedMaslowLevel) {
+            document.getElementById(`maslow-${selectedMaslowLevel}`).classList.remove('selected');
+            selectedMaslowLevel = null;
+        }
+    }
+
+    // ========================================
+    // ACCORDION FUNCTIONS
+    // ========================================
+
     function toggleSection(header) {
         header.classList.toggle('expanded');
         const content = header.nextElementSibling;
@@ -1025,6 +1257,10 @@
         const content = header.nextElementSibling;
         content.classList.toggle('expanded');
     }
+
+    // ========================================
+    // WHEEL OF LIFE
+    // ========================================
 
     const cx = 220, cy = 220;
     const maxRadius = 200;
@@ -1186,9 +1422,14 @@
         closeRatingPanel();
     }
 
+    // ========================================
+    // INITIALIZATION
+    // ========================================
+
     document.addEventListener('DOMContentLoaded', function() {
         initRatingScale();
         
+        // Expand first section (Wheel of Life)
         const firstSection = document.querySelector('h2');
         if (firstSection) {
             firstSection.classList.add('expanded');
