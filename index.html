@@ -82,7 +82,7 @@
         .pyramids-wrapper {
             flex-direction: row;
             justify-content: center;
-            align-items: flex-start;
+            align-items: flex-end;
             gap: 40px;
         }
     }
@@ -133,6 +133,14 @@
         fill: white;
         text-anchor: middle;
         pointer-events: none;
+    }
+
+    .pyramid-label-text {
+        text-align: center;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        color: #0ABAB5;
+        margin-top: 10px;
     }
 
     .pyramid-label {
@@ -703,13 +711,7 @@
         line-height: 1.5;
     }
 
-    .tap-hint {
-        font-size: 0.75rem;
-        color: rgba(255,255,255,0.4);
-        text-align: center;
-        margin-top: 10px;
-        font-style: italic;
-    }
+
 
     @media (min-width: 900px) {
         h1 {
@@ -763,7 +765,7 @@
         <!-- CHIP Pyramid - Interactive -->
         <div class="pyramid-section">
             <div class="pyramid-container">
-                <svg class="pyramid-svg" viewBox="0 0 360 320" xmlns="http://www.w3.org/2000/svg">
+                <svg class="pyramid-svg" viewBox="0 0 360 356" xmlns="http://www.w3.org/2000/svg">
                     <!-- Level 7: Flow -->
                     <polygon class="pyramid-level" id="chip-7" points="180,10 206,58 154,58" fill="#8B5CF6" onclick="showChipDescription(7)"/>
                     <text x="180" y="42" class="level-title-text" font-size="9">Flow</text>
@@ -796,8 +798,7 @@
                     <polygon points="180,10 360,346 0,346" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
                 </svg>
             </div>
-            <p class="tap-hint">Tap a level to learn more</p>
-            <text class="pyramid-label" style="display: block; text-align: center; font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #0ABAB5; margin-top: 10px;">Chip</text>
+            <div class="pyramid-label-text">Chip</div>
             
             <!-- CHIP Description Panel -->
             <div class="description-panel" id="chip-panel">
@@ -815,7 +816,7 @@
         <!-- MASLOW Pyramid - Interactive -->
         <div class="pyramid-section">
             <div class="pyramid-container">
-                <svg class="pyramid-svg" viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg">
+                <svg class="pyramid-svg" viewBox="0 0 360 300" xmlns="http://www.w3.org/2000/svg">
                     <!-- Level 5: Self-actualization -->
                     <polygon class="pyramid-level" id="maslow-5" points="180,10 216,66 144,66" fill="#8B5CF6" onclick="showMaslowDescription(5)"/>
                     <text x="180" y="34" class="level-title-text" font-size="8">Self-</text>
@@ -841,8 +842,7 @@
                     <polygon points="180,10 360,290 0,290" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
                 </svg>
             </div>
-            <p class="tap-hint">Tap a level to learn more</p>
-            <text class="pyramid-label" style="display: block; text-align: center; font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #0ABAB5; margin-top: 10px;">Maslow</text>
+            <div class="pyramid-label-text">Maslow</div>
             
             <!-- Maslow Description Panel -->
             <div class="description-panel" id="maslow-panel">
